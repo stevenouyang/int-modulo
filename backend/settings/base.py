@@ -90,11 +90,14 @@ AUTH_USER_MODEL = "z_auth.User"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "modulo",
+        "USER": "devadmin",
+        "PASSWORD": "testsatuduatiga",
+        "HOST": "103.150.101.6",
+        "PORT": "5431",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -186,3 +189,19 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+AWS_ACCESS_KEY_ID = "009ed54e444dc9645ab3"
+AWS_SECRET_ACCESS_KEY = "FRaaDb55PRWIEyYPjTIrykKhB3FePmciINPGXmvI"
+AWS_STORAGE_BUCKET_NAME = "dev1"
+AWS_S3_ENDPOINT_URL = "http://nos.wjv-1.neo.id"
+AWS_S3_ADDRESSING_STYLE = "path"
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_S3_FILE_OVERWRITE = False
+AWS_IS_GZIPPED = True
+AWS_S3_SECURE_URLS = False
+AWS_S3_USE_SLL = True
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=2592000, public',
+}
