@@ -16,7 +16,6 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -36,6 +35,8 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+    "wagtail.contrib.settings",
+    "wagtail.contrib.routable_page",
     "wagtail",
     "modelcluster",
     "taggit",
@@ -45,6 +46,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.sitemaps',
+    # external:
+    "colorfield",
+
+    # internal:
+    "a_blog",
+    "a_page",
+    "z_auth",
+    "z_globalsetting",
 ]
 
 MIDDLEWARE = [
@@ -84,7 +94,6 @@ TAILWIND_APP_NAME = "theme"
 
 AUTH_USER_MODEL = "z_auth.User"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -117,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -128,7 +136,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -167,7 +174,6 @@ STORAGES = {
 # can exceed this limit within Wagtail's page editor.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
-
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "backend"
@@ -205,3 +211,12 @@ AWS_S3_USE_SLL = True
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=2592000, public',
 }
+
+# MODULE FLAG PARAMETER
+MODULE_BLOG = True
+MODULE_PORTFOLIO = False
+MODULE_EVENT = False
+MODULE_PRODUCT = False
+MODULE_SERVICE = False
+MODULE_BOOKING = False
+MODULE_PROPERTY = False
