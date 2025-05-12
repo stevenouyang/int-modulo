@@ -49,8 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     # external:
     "colorfield",
+    "tailwind",
 
     # internal:
+    "theme",
     "a_blog",
     "a_page",
     "z_auth",

@@ -1,0 +1,124 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ page.meta_title }}</title>
+    <meta name="description" content="{{ page.meta_description }}">
+    <meta name="keywords" content="{{ page.meta_keywords }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v8/font/simple-icons.min.css">
+    {% tailwind_css %}
+    <link rel="shortcut icon" href="{% static 'link/images/favicon.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'link/images/favicon.png' %}">
+    <style>
+        :root {
+            --primary: {{ page.primary_color|default:'#0f0f0f' }};
+            --secondary: {{ page.secondary_color|default:'#0f0f0f' }};
+            --background: {{ page.background_color|default:'#f2f2f2' }};
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen font-sans {% if page.theme == 'dark' %}bg-black text-white{% else %}bg-white text-gray-800{% endif %}">
+
+<div class="max-w-xl mx-auto p-4 animate-fade-in">
+    <div class="text-center mb-12">
+
+        <div class="flex justify-center items-center h-full mb-4 mt-6">
+            <img src="{% static 'link/images/logo-emblem.jpg' %}" alt="Logo"
+                 class="w-20 h-20 rounded-full shadow-md"
+                 style="border: 1px solid var(--secondary);">
+        </div>
+
+
+        <h1 class="text-2xl font-bold mb-2 mt-2" style="color: var(--primary);">
+            {{ page.title }}
+        </h1>
+
+        <p class="mt-2 mb-4"
+           style="color: {% if page.theme == 'dark' %}#666{% else %}#666{% endif %};">
+            {{ page.description }}
+        </p>
+    </div>
+
+
+    {% for item in page.link_items.all %}
+        <div class="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition transform hover:scale-[1.02] duration-200 mb-4">
+            {% if item.type == 'image' and item.image_thumbnail %}
+                <img src="{{ item.image_thumbnail.url }}" alt="{{ item.title }}" class="rounded-lg mb-3 w-full">
+            {% endif %}
+            {% if item.link %}
+                <a href="{{ item.link }}" target="_blank" rel="noopener"
+                   class="block font-bold text-lg hover:underline"
+                   style="color: var(--primary);">
+                    {{ item.title }}
+                </a>
+            {% else %}
+                <span class="block font-bold text-lg" style="color: var(--primary);">{{ item.title }}</span>
+            {% endif %}
+            {% if item.subtitle %}
+                <p class="text-sm text-gray-500 mt-1">{{ item.subtitle }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% if page.enable_social_link %}
+        {% with settings.globalsetting.SocialSetting as social %}
+            <ul class="flex justify-center flex-wrap gap-4 mb-6 mt-12">
+                {% if social.facebook_link %}
+                    <li>
+                        <a href="{{ social.facebook_link }}" target="_blank"
+                           class="flex items-center justify-center w-12 h-12 text-blue-600 hover:text-blue-800 bg-blue-100 hover:bg-blue-200 rounded-full transition">
+                            <i class="si si-facebook text-2xl"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if social.instagram_link %}
+                    <li>
+                        <a href="{{ social.instagram_link }}" target="_blank"
+                           class="flex items-center justify-center w-12 h-12 text-pink-500 hover:text-pink-700 bg-pink-100 hover:bg-pink-200 rounded-full transition">
+                            <i class="si si-instagram text-2xl"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if social.youtube_link %}
+                    <li>
+                        <a href="{{ social.youtube_link }}" target="_blank"
+                           class="flex items-center justify-center w-12 h-12 text-red-600 hover:text-red-800 bg-red-100 hover:bg-red-200 rounded-full transition">
+                            <i class="si si-youtube text-2xl"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if social.tiktok_link %}
+                    <li>
+                        <a href="{{ social.tiktok_link }}" target="_blank"
+                           class="flex items-center justify-center w-12 h-12 text-gray-800 hover:text-black bg-gray-200 hover:bg-gray-300 rounded-full transition">
+                            <i class="si si-tiktok text-2xl"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if social.linkedin_link %}
+                    <li>
+                        <a href="{{ social.linkedin_link }}" target="_blank"
+                           class="flex items-center justify-center w-12 h-12 text-blue-700 hover:text-blue-900 bg-blue-100 hover:bg-blue-200 rounded-full transition">
+                            <i class="si si-linkedin text-2xl"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endwith %}
+    {% endif %}
+
+
+</div>
+
+</body>
+</html>
