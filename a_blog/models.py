@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from autoslug import AutoSlugField
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, TitleFieldPanel
 from wagtail.search import index
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
@@ -15,10 +15,11 @@ import math
 from bs4 import BeautifulSoup
 from wagtail.contrib.routable_page.models import RoutablePageMixin
 from .utils import process_blog_content
+from django.conf import settings
 
 
 class BlogIndex(RoutablePageMixin, Page):
-    template            = "a_page/page/list.html"
+    template            = "a_page/page/dummy.html"
 
     subpage_types       = ['a_blog.Blog']
     parent_page_types   = ['home.HomePage']
@@ -34,7 +35,7 @@ class BlogIndex(RoutablePageMixin, Page):
 class BlogCategory(index.Indexed, models.Model):
     name                = models.CharField(max_length=30, blank=False)
     slug                = AutoSlugField(populate_from="name", blank=True, null=True)
-    image               = models.ImageField(upload_to="blog/category", null=True, default=None)
+    image               = models.ImageField(upload_to="blog/category", null=True, default=None, blank=True)
 
     # date
     date_created        = models.DateTimeField(auto_now_add=True)
@@ -45,18 +46,17 @@ class BlogCategory(index.Indexed, models.Model):
     ]
 
     panels = [
-        FieldPanel("name"),
+        TitleFieldPanel("name"),
         FieldPanel("image"),
     ]
 
+    if getattr(settings, "BLOG_CATEGORY_IMAGE", False):
+        panels += [
+            FieldPanel("image"),
+        ]
+
     def __str__(self):
         return self.name
-
-    def get_url(self):
-        return reverse("portfolio:blog_list") + f"?category={self.slug}"
-
-    def get_absolute_url(self):
-        return self.get_url()
 
 
 class Blog(Page):
@@ -153,7 +153,7 @@ class Blog(Page):
 
 
     content_panels          = [
-                                FieldPanel("title"),
+                                TitleFieldPanel("title"),
 
                                 FieldPanel("date"),
                                 FieldPanel("category"),

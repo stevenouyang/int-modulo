@@ -1,7 +1,7 @@
 from django.db import models
 from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, TitleFieldPanel
 from modelcluster.models import ClusterableModel
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
@@ -112,6 +112,38 @@ class LinkItem(Orderable):
     class Meta:
         verbose_name = "Link Item"
 
+class FAQ(Page):
+    template            = "a_page/page/faq.html"
+    parent_page_types   = ['home.HomePage']
+    subpage_types       = []
+    max_count           = 1
+
+    text_content        = StreamField(
+                [
+                                (
+                                    "paragraph",
+                                    blocks.RichTextBlock(features=["p", "a"]),
+                                ),
+                                (
+                                    "h4",
+                                    blocks.CharBlock(features=["h4"]),
+                                ),
+                            ],
+                            use_json_field=True,
+                            null=True,
+                            blank=True,
+                        )
+
+    content_panels = [
+        TitleFieldPanel("title"),
+        FieldPanel("text_content"),
+        InlinePanel("faq_items", label="FAQ Items"),
+    ]
+
+class FAQItem(Orderable):
+    faq = ParentalKey('FAQ', related_name='faq_items')
+    question = models.CharField(max_length=150)
+    answer = models.TextField()
 
 # class RateCard():
 #     template            = "a_page/page/rate_card.html"

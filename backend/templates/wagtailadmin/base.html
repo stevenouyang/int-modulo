@@ -1,0 +1,12 @@
+{% extends "wagtailadmin/base.html" %}
+{% load static %}
+
+{% block branding_logo %}
+    <img src="{% static 'branding/claverio-modulo-small.png' %}" alt="Claverio" width="140" />
+{% endblock %}
+
+{% block branding_favicon %}
+    <link rel="shortcut icon" href="{% static 'branding/modulo-v2-white.png' %}" />
+{% endblock %}
+
+{% block branding_title %}Modulo{% endblock %}

@@ -14,29 +14,47 @@ from django.conf import settings
 
 
 class BrandingSetting(SingletonModel):
-    site_name           = models.CharField(max_length=255, verbose_name="Site Name", default="Denza")
-    company_name        = models.CharField(max_length=255, verbose_name="Company Name", default="Denza Indonesia")
+    site_name                   = models.CharField(max_length=255, verbose_name="Site Name", default="Denza")
+    company_name                = models.CharField(max_length=255, verbose_name="Company Name", default="Denza Indonesia")
 
-    logo                = models.ImageField(upload_to='branding/logo/', blank=True, null=True, verbose_name="Logo")
-    logo_processed      = ImageSpecField(
-                            source="logo",
-                            processors=[ResizeToFill(1920, 600)],
-                            format="webP",
-                            options={"quality": 90},
-                        )
+    logo                        = models.ImageField(upload_to='branding/logo/', blank=True, null=True, verbose_name="Logo")
+    logo_processed              = ImageSpecField(
+                                    source="logo",
+                                    processors=[ResizeToFill(1920, 600)],
+                                    format="webP",
+                                    options={"quality": 90},
+                                )
 
-    favicon             = models.ImageField(upload_to='branding/favicon/', blank=True, null=True, verbose_name="Favicon")
-    favicon_processed   = ImageSpecField(
-                            source="favicon",
-                            processors=[ResizeToFill(1920, 600)],
-                            format="webP",
-                            options={"quality": 90},
-                        )
+    emblem                      = models.ImageField(upload_to='branding/emblem/', blank=True, null=True, verbose_name="Emblem")
+    emblem_processed            = ImageSpecField(
+                                    source="emblem",
+                                    processors=[ResizeToFill(400, 400)],
+                                    format="webP",
+                                    options={"quality": 90},
+                                )
+
+    emblem_rounded              = models.ImageField(upload_to='branding/emblem/', blank=True, null=True, verbose_name="Emblem Ronded BG")
+    emblem_rounded_processed    = ImageSpecField(
+                                    source="emblem_rounded",
+                                    processors=[ResizeToFill(400, 400)],
+                                    format="webP",
+                                    options={"quality": 90},
+                                )
+
+    favicon                     = models.ImageField(upload_to='branding/favicon/', blank=True, null=True, verbose_name="Favicon")
+    favicon_processed           = ImageSpecField(
+                                    source="favicon",
+                                    processors=[ResizeToFill(1920, 600)],
+                                    format="webP",
+                                    options={"quality": 90},
+                                )
 
     panels = [
         FieldPanel("site_name"),
         FieldPanel("company_name"),
         FieldPanel("logo"),
+        FieldPanel("emblem"),
+        FieldPanel("emblem_rounded"),
         FieldPanel("favicon"),
     ]
 

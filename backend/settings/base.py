@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django.contrib.sitemaps',
+    'django_jinja',
     # external:
     "colorfield",
     "tailwind",
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     "theme",
     "a_blog",
     "a_page",
+    "a_portfolio",
     "z_auth",
     "z_globalsetting",
 ]
@@ -75,9 +77,7 @@ ROOT_URLCONF = "backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(PROJECT_DIR, "templates"),
-        ],
+        "DIRS": [os.path.join(PROJECT_DIR, "templates"),],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,6 +85,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "z_globalsetting.context_processors.branding_context_processor",
             ],
         },
     },
@@ -178,7 +179,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "backend"
+WAGTAIL_SITE_NAME = "Modulo By Claverio"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -222,3 +223,7 @@ MODULE_PRODUCT = False
 MODULE_SERVICE = False
 MODULE_BOOKING = False
 MODULE_PROPERTY = False
+
+BLOG_CATEGORY_IMAGE = True
+CONTENT_FORM = True
+CONTENT_SLIDER_VIDEO = True

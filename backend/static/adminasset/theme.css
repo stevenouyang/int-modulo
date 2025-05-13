@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+    --w-font-sans: "Open Sans";
+    --w-color-primary: #072d79;
+    /* Any valid CSS format is supported. */
+    --w-color-primary-200: hsl(219, 89%, 26%);
+    --w-color-secondary: #213459;
+    --w-color-focus: #213459;
+    /* Set each HSL component separately to change all hues at once. */
+    --w-color-secondary-hue: 180.5;
+    --w-color-secondary-saturation: 100%;
+    --w-color-secondary-lightness: 24.7%;
+    --w-color-surface-button-default: hsl(219, 36%, 34%);
+    --w-color-surface-button-hover: hsl(212, 64%, 34%);
+    --w-color-text-link-default: hsl(218, 59%, 40%);
+    --w-color-text-link-hover: hsl(217, 35%, 36%);
+    --w-color-surface-menus: hsl(219, 56%, 20%);
+}
+
+form[role="search"] {
+    display: none;
+}

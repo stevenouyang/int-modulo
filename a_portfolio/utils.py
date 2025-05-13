@@ -74,7 +74,7 @@ def process_image_block(item, width, height, suffix):
     base_name, ext = image_filename.rsplit('.', 1)
     new_filename = f"{base_name}_{suffix}.webp"
 
-    s3_resized_path = f"dev1/blog_utils/resized_images/{new_filename}"
+    s3_resized_path = f"dev1/portfolio_utils/resized_images/{new_filename}"
 
     try:
         s3_client.head_object(Bucket=S3_BUCKET_NAME, Key=s3_resized_path)
@@ -98,8 +98,8 @@ def process_image_block(item, width, height, suffix):
     item.processed_image_url = f"{S3_BASE_ACCESS_URL}/{S3_BUCKET_NAME}/{s3_resized_path}"
 
 
-def process_blog_content(blog_content):
-    for item in blog_content:
+def process_portfolio_content(portfolio_content):
+    for item in portfolio_content:
         dimensions = extract_dimensions_from_block_type(item.block_type)
         if dimensions:
             width, height, suffix = dimensions
