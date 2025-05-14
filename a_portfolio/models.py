@@ -23,17 +23,18 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from .utils import process_portfolio_content
 
-class PortfolioIndex(Page):
-    template            = "a_page/page/dummy.html"
 
-    subpage_types       = ['a_portfolio.Portfolio']
-    parent_page_types   = ['home.HomePage']
-    max_count           = 1
+class PortfolioIndex(Page):
+    template = "a_page/page/dummy.html"
+
+    subpage_types = ['a_portfolio.Portfolio']
+    parent_page_types = ['home.HomePage']
+    max_count = 1
 
     # Main listing page: /portfolio/
     def get_context(self, request):
-        context             = super().get_context(request)
-        context['posts']    = Portfolio.objects.live().descendant_of(self)
+        context = super().get_context(request)
+        context['posts'] = Portfolio.objects.live().descendant_of(self)
         return context
 
 
@@ -42,90 +43,92 @@ class PortfolioPageTag(TaggedItemBase):
 
 
 class Portfolio(Page):
-    template                = "a_portfolio/page/details.html"
-    parent_page_types       = ['a_portfolio.PortfolioIndex']
-    subpage_types           = []
+    template = "a_portfolio/page/details.html"
+    parent_page_types = ['a_portfolio.PortfolioIndex']
+    subpage_types = []
 
-    tags                    = ClusterTaggableManager(through=PortfolioPageTag, blank=True)
-    is_show                 = models.BooleanField(default=True)
-    image                   = models.ImageField(upload_to="portfolio/main", null=True, default=None)
+    tags = ClusterTaggableManager(through=PortfolioPageTag, blank=True)
+    is_show = models.BooleanField(default=True)
+    image = models.ImageField(upload_to="portfolio/main", null=True, default=None)
 
-    client                  = models.CharField(max_length=255, blank=True, null=True)
-    project_date            = models.DateField(blank=True, null=True)
-    url                     = models.URLField(blank=True, null=True)
+    client = models.CharField(max_length=255, blank=True, null=True)
+    project_date = models.DateField(blank=True, null=True)
+    url = models.URLField(blank=True, null=True)
 
-    image_processed         = ImageSpecField(
-                                source="image",
-                                processors=[ResizeToFill(1920, 1080)],
-                                format="webP",
-                                options={"quality": 90},
-                            )
+    image_processed = ImageSpecField(
+        source="image",
+        processors=[ResizeToFill(1920, 1080)],
+        format="webP",
+        options={"quality": 90},
+    )
 
-    overview                = models.TextField(blank=True, null=True)
+    overview = models.TextField(blank=True, null=True)
 
-    content                 = StreamField(
-                                [
-                                    (
-                                        "paragraph",
-                                        blocks.RichTextBlock(features=["p", "a"]),
-                                    ),
-                                    (
-                                        "h4",
-                                        blocks.CharBlock(features=["h4"]),
-                                    ),
-                                    (
-                                        "h5",
-                                        blocks.CharBlock(features=["h6"]),
-                                    ),
-                                    (
-                                        "h6",
-                                        blocks.CharBlock(features=["h6"]),
-                                    ),
-                                    (
-                                        "ordered_list",
-                                        blocks.RichTextBlock(
-                                            features=["ol"],
-                                        ),
-                                    ),
-                                    (
-                                        "unordered_list",
-                                        blocks.RichTextBlock(
-                                            features=["ul"],
-                                        ),
-                                    ),
-                                    ("blockquote_1", blocks.CharBlock()),
-                                    (
-                                        "image_1280x720",
-                                        ImageChooserBlock(label="Image 1280x720", help_text="1280 x 720"),
-                                    ),
-                                    (
-                                        "image_1280x1280",
-                                        ImageChooserBlock(label="Image 1280x1280", help_text="1280 x 1280"),
-                                    ),
-                                    (
-                                        "image_1280x800",
-                                        ImageChooserBlock(label="Image 1280x800", help_text="1280 x 800"),
-                                    ),
-                                    ("url", blocks.URLBlock()),
-                                    ('button', blocks.StructBlock([
-                                        ('text', blocks.CharBlock(required=True)),
-                                        ('url', blocks.URLBlock(required=True)),
-                                    ], icon='plus')),
-                                    ("spacer", blocks.StaticBlock(label="Spacer")),
-                                    ("html", blocks.RawHTMLBlock(label="Raw HTML", icon="code")),
-                                ],
-                                use_json_field=True,
-                                null=True,
-                                blank=True,
-                            )
+    content = StreamField(
+        [
+            (
+                "paragraph",
+                blocks.RichTextBlock(features=["p", "a"]),
+            ),
+            (
+                "h4",
+                blocks.CharBlock(features=["h4"]),
+            ),
+            (
+                "h5",
+                blocks.CharBlock(features=["h6"]),
+            ),
+            (
+                "h6",
+                blocks.CharBlock(features=["h6"]),
+            ),
+            (
+                "ordered_list",
+                blocks.RichTextBlock(
+                    features=["ol"],
+                ),
+            ),
+            (
+                "unordered_list",
+                blocks.RichTextBlock(
+                    features=["ul"],
+                ),
+            ),
+            ("blockquote_1", blocks.CharBlock()),
+            (
+                "image_1280x720",
+                ImageChooserBlock(label="Image 1280x720", help_text="1280 x 720"),
+            ),
+            (
+                "image_1280x1280",
+                ImageChooserBlock(label="Image 1280x1280", help_text="1280 x 1280"),
+            ),
+            (
+                "image_1280x800",
+                ImageChooserBlock(label="Image 1280x800", help_text="1280 x 800"),
+            ),
+            ("url", blocks.URLBlock()),
+            ('button', blocks.StructBlock([
+                ('text', blocks.CharBlock(required=True)),
+                ('url', blocks.URLBlock(required=True)),
+            ], icon='plus')),
+            ("spacer", blocks.StaticBlock(label="Spacer")),
+            ("html", blocks.RawHTMLBlock(label="Raw HTML", icon="code")),
+        ],
+        use_json_field=True,
+        null=True,
+        blank=True,
+    )
 
     # seo
-    meta_key                = models.TextField(max_length=100, blank=True, null=True)
-    meta_desc               = models.TextField(max_length=160, blank=True, null=True)
+    meta_key = models.TextField(max_length=100, blank=True, null=True)
+    meta_desc = models.TextField(max_length=160, blank=True, null=True)
 
     # date
-    created_at              = models.DateTimeField(auto_now_add=True)
-    updated_at              = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    views = models.IntegerField(default=0)
 
     content_panels = [
         TitleFieldPanel("title"),
@@ -170,15 +173,15 @@ class Portfolio(Page):
         return self.title
 
 
-
 # inline: portfolio
 class PortfolioHightlight(Orderable):
-    portfolio       = ParentalKey(Portfolio, related_name="portfolio_highlight")
-    title           = models.CharField(max_length=50)
-    title_id        = models.CharField(max_length=50, blank=True, null=True)
+    portfolio = ParentalKey(Portfolio, related_name="portfolio_highlight")
+    title = models.CharField(max_length=50)
+    title_id = models.CharField(max_length=50, blank=True, null=True)
+
 
 # inline: portfolio
 class PortfolioGallery(Orderable):
-    portfolio       = ParentalKey(Portfolio, related_name='portfolio_gallery')
-    title           = models.CharField(max_length=40, blank=True, null=True)
-    image           = models.ImageField(upload_to='portfolio/gallery')
+    portfolio = ParentalKey(Portfolio, related_name='portfolio_gallery')
+    title = models.CharField(max_length=40, blank=True, null=True)
+    image = models.ImageField(upload_to='portfolio/gallery')
