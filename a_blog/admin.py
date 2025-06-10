@@ -6,12 +6,12 @@ from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 class BlogCategoryAdmin(SnippetViewSet):
     model = BlogCategory
     menu_label = "Blog Category"
-    icon = "list"
+    icon = "list-ul"
     menu_order = 25
     list_display = ("name", )
 
 class BlogSettingAdmin(SnippetViewSetGroup):
-    menu_icon = "doc-full-inverse"
+    menu_icon = "doc-full"
     menu_label = "Blog"
     menu_name = "Blog"
     items = (
