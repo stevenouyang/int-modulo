@@ -1,0 +1,14 @@
+{
+  "venvPath": "/opt/anaconda3/envs",
+  "venv": "dw",
+  "include": ["."],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportArgumentType": false,
+  "reportIncompatibleMethodOverride": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownArgumentType": false,
+  "reportMissingTypeStubs": false
+}
