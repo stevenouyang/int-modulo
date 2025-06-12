@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "a_portfolio",
     "a_blog",
     "b_misc",
+    "b_inbox",
     "b_analytics",
     "z_auth",
     "z_globalsetting",
