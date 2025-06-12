@@ -19,7 +19,7 @@ class PageVisitLogAdmin(SnippetViewSet):
 
 class AnalyticSettingAdmin(SnippetViewSetGroup):
     menu_icon = "view"
-    menu_label = "view"
+    menu_label = "Analytics"
     menu_name = "Analytics"
     items = (
         WhatsappLogAdmin,

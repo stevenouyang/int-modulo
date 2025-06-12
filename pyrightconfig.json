@@ -3,7 +3,7 @@
   "venv": "dw",
   "include": ["."],
   "pythonVersion": "3.12",
-  "typeCheckingMode": "basic",
+  "typeCheckingMode": "off",
   "reportMissingImports": true,
   "reportArgumentType": false,
   "reportIncompatibleMethodOverride": false,

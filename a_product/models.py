@@ -13,6 +13,7 @@ from wagtail import blocks
 from wagtail.fields import StreamField
 from colorfield.fields import ColorField
 from autoslug import AutoSlugField
+from wagtail.images.blocks import ImageChooserBlock
 
 
 class ProductCategory(models.Model):
@@ -35,7 +36,7 @@ class ProductCategory(models.Model):
         return self.title
 
 
-class Product(models.Model):
+class Product(ClusterableModel):
     title = models.CharField(max_length=30, blank=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -72,6 +73,14 @@ class Product(models.Model):
                     features=["ul"],
                 ),
             ),
+            ("blockquote_1", blocks.CharBlock()),
+            ("url", blocks.URLBlock()),
+            ('button', blocks.StructBlock([
+                ('text', blocks.CharBlock(required=True)),
+                ('url', blocks.URLBlock(required=True)),
+            ], icon='plus')),
+            ("spacer", blocks.StaticBlock(label="Spacer")),
+            ("html", blocks.RawHTMLBlock(label="Raw HTML", icon="code")),
         ],
         use_json_field=True,
         null=True,
@@ -139,9 +148,6 @@ class ProductGallery(models.Model):
     panels = [
         FieldPanel("image"),
     ]
-
-    def __str__(self):
-        return self.product.title
 
     class Meta:
         verbose_name = "Product Gallery"

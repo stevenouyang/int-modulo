@@ -54,9 +54,11 @@ INSTALLED_APPS = [
 
     # internal:
     "theme",
-    "a_blog",
     "a_page",
+    "a_product",
     "a_portfolio",
+    "a_blog",
+    "b_misc",
     "b_analytics",
     "z_auth",
     "z_globalsetting",
