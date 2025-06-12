@@ -5,7 +5,7 @@ from .models import SubmittedForm
 
 class SubmittedFormAdmin(SnippetViewSet):
     model = SubmittedForm
-    menu_label = "MarketPlace"
+    menu_label = "Submitted Form"
     icon = "form"
     menu_order = 51
     list_display = ("name", "email", "phone", "date_created")
