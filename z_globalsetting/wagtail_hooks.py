@@ -22,7 +22,7 @@ def hide_default_menu_items(request, menu_items):
     filtered_menu_items = [
         item
         for item in menu_items
-        if item.name not in ["help", "images", "Task", "reports"]
+        if item.name not in ["help", "images", "Task", "reports", "documents"]
     ]
 
     # Print every menu in the filtered_menu_items list

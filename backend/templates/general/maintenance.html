@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>{{ ctx_branding.site_name }} - Under Maintenance</title>
+        <link
+            rel="shortcut icon"
+            href="{{ ctx_branding.favicon_processed.url }}"
+        />
+        <link
+            rel="apple-touch-icon-precomposed"
+            href="{{ ctx_branding.favicon_processed.url }}"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    </head>
+    <body class="bg-gray-200">
+        <section class="py-24 relative">
+            <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+                <div
+                    class="w-full md:px-16 px-10 md:pt-16 pt-10 pb-10 bg-gray-900 rounded-2xl flex-col justify-end items-center lg:gap-28 md:gap-16 gap-10 inline-flex"
+                >
+                    <div
+                        class="flex-col justify-end items-center lg:gap-16 gap-10 flex"
+                    >
+                        <img
+                            src="{{ ctx_branding.logo.url }}"
+                            alt="pagedone logo image"
+                            class="object-cover"
+                            width="250"
+                        />
+                        <div
+                            class="flex-col justify-center items-center gap-10 flex"
+                        >
+                            <div
+                                class="flex-col justify-start items-center gap-2.5 flex"
+                            >
+                                <h2
+                                    class="text-center text-blue-500 md:text-6xl text-5xl font-bold font-manrope leading-normal"
+                                >
+                                    Under Maintenance
+                                </h2>
+                                <p
+                                    class="text-center text-gray-500 text-base font-normal leading-relaxed"
+                                >
+                                    Just doing a lil’ tune-up to make things
+                                    better for you~ Be right back!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <p
+                        class="text-center text-gray-500 text-sm font-normal leading-snug"
+                    >
+                        Powered By Modulo By
+                        <a
+                            class="text-blue-500"
+                            href="https://claverio.com/"
+                            target="_blank"
+                            >Claverio</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

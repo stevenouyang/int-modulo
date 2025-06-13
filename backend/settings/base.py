@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail.contrib.settings",
     "wagtail.contrib.routable_page",
+    "wagtail.contrib.table_block",
     "wagtail",
     "modelcluster",
     "taggit",
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     "a_page",
     "a_product",
     "a_portfolio",
+    "a_service",
     "a_blog",
     "b_misc",
     "b_inbox",
@@ -74,6 +76,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "z_globalsetting.middleware.SiteStatusSettingMiddleware",
 ]
 
 ROOT_URLCONF = "backend.urls"

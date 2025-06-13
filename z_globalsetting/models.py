@@ -171,6 +171,14 @@ class PageSEOSetting(BaseGenericSetting):
             FieldPanel("event_meta_desc"),
         ]
 
+@register_setting
+class InstagramSocialEmbed(BaseGenericSetting):
+    embed = models.TextField()
+
+    panels = [
+        FieldPanel("embed")
+    ]
+
 
 @register_setting
 class DisplayFlag(BaseGenericSetting):
@@ -190,3 +198,24 @@ class ThemeSetting(BaseGenericSetting):
         FieldPanel("primary_color"),
         FieldPanel("secondary_color"),
     ]
+
+@register_setting
+class SiteStatusSetting(BaseGenericSetting):
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('coming_soon', 'Coming Soon'),
+        ('maintenance', 'Maintenance'),
+    ]
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='active',
+    )
+
+    panels = [
+        FieldPanel("status"),
+    ]
+
+    def __str__(self):
+        return f"{self.get_status_display()}"
