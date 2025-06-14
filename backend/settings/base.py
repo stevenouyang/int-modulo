@@ -49,22 +49,32 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django.contrib.sitemaps',
     'django_jinja',
+
     # external:
     "colorfield",
     "tailwind",
 
     # internal:
     "theme",
+
+    # main application
     "a_page",
     "a_product",
     "a_portfolio",
+    "a_dealer",
+    "a_property",
     "a_service",
     "a_blog",
+
+    # secondary application
     "b_misc",
     "b_inbox",
     "b_analytics",
+
+    # utility application
     "z_auth",
     "z_globalsetting",
+
 ]
 
 MIDDLEWARE = [
